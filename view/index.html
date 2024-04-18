@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Gallery</title>
+    <style>
+        h1 {
+            font-family: Satisfy;
+            font-size: 50px;
+            text-align: center;
+            color: black;
+            padding: 1%;
+        }
+
+        .upload-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #uploadInput {
+            display: none;
+        }
+
+        .upload-button {
+            display: inline-block;
+            background-color: #000000;
+            color: white;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .upload-button:hover {
+            background-color: #888888;
+            color: black;
+        }
+
+        #gallery {
+            -webkit-column-count: 4;
+            -moz-column-count: 4;
+            column-count: 4;
+
+            -webkit-column-gap: 20px;
+            -moz-column-gap: 20px;
+            column-gap: 20px;
+        }
+
+        @media (max-width: 1200px) {
+            #gallery {
+                -webkit-column-count: 3;
+                -moz-column-count: 3;
+                column-count: 3;
+
+                -webkit-column-gap: 20px;
+                -moz-column-gap: 20px;
+                column-gap: 20px;
+            }
+        }
+
+        @media (max-width: 800px) {
+            #gallery {
+                -webkit-column-count: 2;
+                -moz-column-count: 2;
+                column-count: 2;
+
+                -webkit-column-gap: 20px;
+                -moz-column-gap: 20px;
+                column-gap: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #gallery {
+                -webkit-column-count: 1;
+                -moz-column-count: 1;
+                column-count: 1;
+            }
+        }
+
+        #gallery img, #gallery video {
+            width: 100%;
+            height: auto;
+            margin: 4% auto;
+            box-shadow: -3px 5px 15px #000;
+            cursor: pointer;
+            -webkit-transition: all 0.2s;
+            transition: all 0.2s;
+        }
+
+        .modal-img, .model-vid {
+            width: 100%;
+            height: auto;
+        }
+
+        .modal-body {
+            padding: 0px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 270px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>KeynandZ Image Gallery</h1>
+    <div class="upload-container">
+        <input type="file" id="uploadInput" accept="image/*">
+        <label for="uploadInput" class="upload-button">add image</label>
+    </div>
+    <hr>
+
+    <div id="gallery" class="container-fluid">
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/image')
+            .then(response => response.json())
+            .then(imageLinks => {
+                const gallery = document.getElementById('gallery');
+                imageLinks.forEach(link => {
+                    const img = document.createElement('img');
+                    img.src = link;
+                    img.classList.add('img-responsive');
+                    img.addEventListener("click", function () {
+                        var t = this.getAttribute("src");
+                        document.querySelector(".modal-body").innerHTML = "<img src='" + t + "' class='modal-img'>";
+                        document.querySelector("#myModal").style.display = "block";
+                    });
+                    gallery.appendChild(img);
+                });
+            })
+            .catch(error => console.error('Error fetching image links:', error));
+
+            document.getElementById('uploadInput').addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const formData = new FormData();
+                    formData.append('image', file);
+
+                    fetch('/upload', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Image uploaded successfully');
+                            this.value = '';
+                            location.reload();
+                        } else {
+                            throw new Error('Failed to upload image');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error uploading image:', error);
+                        alert('Failed to upload image');
+                    });
+                } else {
+                    alert('Please select an image to upload');
+                }
+            });
+            
+            document.querySelector(".close").addEventListener("click", function () {
+                document.querySelector("#myModal").style.display = "none";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target == document.querySelector("#myModal")) {
+                    document.querySelector("#myModal").style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
