@@ -1,5 +1,7 @@
 # KeynandZ Image Gallery
 
+![IMG](https://i.ibb.co/sPP8hWz/image-2024-04-18-102232265.png)
+
 KeynandZ Image Gallery adalah aplikasi web sederhana yang memungkinkan pengguna untuk melihat dan mengunggah gambar ke galeri. Aplikasi ini menggunakan teknologi Go untuk server backend, Minio sebagai penyimpanan file, dan HTML/CSS/JavaScript untuk tampilan frontend.
 
 ## Fitur Utama
@@ -51,6 +53,3 @@ Sebelum menjalankan proyek ini, pastikan Anda telah memenuhi prasyarat berikut:
     ```
 
 6. Buka browser dan akses `http://localhost:9000` untuk melihat galeri gambar.
-
-## INTERFACE
-![IMG](https://i.ibb.co/sPP8hWz/image-2024-04-18-102232265.png)
