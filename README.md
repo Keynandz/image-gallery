@@ -51,3 +51,6 @@ Sebelum menjalankan proyek ini, pastikan Anda telah memenuhi prasyarat berikut:
     ```
 
 6. Buka browser dan akses `http://localhost:9000` untuk melihat galeri gambar.
+
+## INTERFACE
+![IMG](https://i.ibb.co/sPP8hWz/image-2024-04-18-102232265.png)
