@@ -1,4 +1,4 @@
-# KeynandZ Image Gallery
+# KeynandZ Image Gallery (RESPONSIVE)
 
 ![IMG](https://i.ibb.co/sPP8hWz/image-2024-04-18-102232265.png)
 
