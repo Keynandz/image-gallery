@@ -2,36 +2,36 @@
 
 ![IMG](https://i.ibb.co/sPP8hWz/image-2024-04-18-102232265.png)
 
-KeynandZ Image Gallery adalah aplikasi web sederhana yang memungkinkan pengguna untuk melihat dan mengunggah gambar ke galeri. Aplikasi ini menggunakan teknologi Go untuk server backend, Minio sebagai penyimpanan file, dan HTML/CSS/JavaScript untuk tampilan frontend.
+KeynandZ Image Gallery is a simple web application that allows users to view and upload images to a gallery. This application utilizes Go technology for the backend server, Minio as the file storage, and HTML/CSS/JavaScript for the frontend view.
 
-## Fitur Utama
+## Key Features
 
-- Melihat galeri gambar yang telah diunggah.
-- Mengunggah gambar baru ke galeri.
+- View the uploaded image gallery.
+- Upload new images to the gallery.
 
-## Prasyarat
+## Prerequisites
 
-Sebelum menjalankan proyek ini, pastikan Anda telah memenuhi prasyarat berikut:
+Before running this project, make sure you have the following prerequisites:
 
-- Go (versi 1.16 atau lebih baru) telah terpasang di komputer Anda.
-- Minio server telah terpasang dan dikonfigurasi.
-- Go module telah diaktifkan.
+- Go (version 1.16 or newer) installed on your computer.
+- Minio server installed and configured.
+- Go module enabled.
 
-## Cara Menggunakan
+## How to Use
 
-1. Clone repositori ini ke komputer Anda:
+1. Clone this repository to your computer:
 
     ```
     git clone https://github.com/Keynandz/image-gallery.git
     ```
 
-2. Masuk ke direktori proyek:
+2. Navigate to the project directory:
 
     ```
     cd keynandz-image-gallery
     ```
 
-3. Buat file `.env` dan atur konfigurasi seperti yang dibutuhkan. Contoh isi `.env`:
+3. Create a `.env` file and set up the configuration as needed. Example content of `.env`:
 
     ```
     MINIO_ENDPOINT=http://localhost:9000
@@ -40,16 +40,17 @@ Sebelum menjalankan proyek ini, pastikan Anda telah memenuhi prasyarat berikut:
     MINIO_BUCKET=image-gallery
     ```
 
-4. Install dependensi Go menggunakan Go module:
+4. Install Go dependencies using Go module:
 
     ```
     go mod tidy
     ```
 
-5. Jalankan aplikasi:
+5. Run the application:
 
     ```
     go run main.go
     ```
 
-6. Buka browser dan akses `http://localhost:9000` untuk melihat galeri gambar.
+6. Open a browser and access `http://localhost:9000` to view the image gallery.
+
