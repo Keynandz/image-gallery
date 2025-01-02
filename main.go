@@ -21,6 +21,11 @@ func main() {
 	e := echo.New()
 	minioClient, bucketName := MinioClient()
 
+	port := os.Getenv("SERVER_PORT")
+	if port == "" {
+		port = "9000"
+	}
+
 	e.GET("/", func(c echo.Context) error {
 		return c.File("view/index.html")
 	})
@@ -61,11 +66,12 @@ func main() {
 	e.Use(middleware.CORS())
 
 	if os.Getenv("SSL_CERT_PATH") != "" && os.Getenv("SSL_KEY_PATH") != "" {
-		e.Logger.Fatal(e.StartTLS(":9000", os.Getenv("SSL_CERT_PATH"), os.Getenv("SSL_KEY_PATH")))
+		e.Logger.Fatal(e.StartTLS(":"+port, os.Getenv("SSL_CERT_PATH"), os.Getenv("SSL_KEY_PATH")))
 	} else {
-		e.Logger.Fatal(e.Start(":9000"))
+		e.Logger.Fatal(e.Start(":" + port))
 	}
 }
+
 
 func MinioClient() (*minio.Client, string) {
 	loadErr := godotenv.Load()
