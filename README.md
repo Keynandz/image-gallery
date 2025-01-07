@@ -28,7 +28,7 @@ Before running this project, make sure you have the following prerequisites:
 2. Navigate to the project directory:
 
     ```
-    cd keynandz-image-gallery
+    cd image-gallery
     ```
 
 3. Create a `.env` file and set up the configuration as needed. Example content of `.env`:
